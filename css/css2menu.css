@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+body {
+    margin: 0;
+    font-family: "DM Serif Text", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 50%, #F7CE68 98%);
+    height: 100vh;
+}
+
+header {
+    background-color: blanchedalmond;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 10px 0;
+}
+
+header .logo {
+    position: absolute;
+    left: 2%;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+}
+header .menu {
+    display: flex;
+    justify-content: center;
+    gap: 15%;
+    width: 30%;
+    font-size: 20px;
+}
+.menu p:hover {
+    font-weight: bold;
+}
+
+
+header div img {
+    width: 20%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.boton {
+    width: 20%;
+    text-align: center;
+}
+.boton p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+
+div#botones {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10%;
+}
+
+.container-boton-añadir {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
+}
+
+.alumnos, .empresas, .bolsa {
+    width: 100%;
+    height: 35vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    border-radius: 30px;
+}
+
+.alumnos {
+    background-image: url("img/alumnos.jpg");
+}
+
+.empresas {
+    background-image: url("img/empresas.png");
+}
+
+.bolsa {
+    background-image: url("img/bolsa.png");
+}
+
+.alumnos:hover, .empresas:hover, .bolsa:hover {
+    border: 2px solid black;
+    border-radius: 30px;
+}
+
+/* Vista de los alumnos */
+
+#contenido {
+    display: none;
+    padding: 20px;
+    text-align: center;
+}
+
+#filtros {
+    display: flex;
+    justify-content: center;
+    gap: 3%;
+    margin-top: 2%;
+    margin-bottom: 4%;
+}
+
+#filtros select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#tarjetas, #tarjetas-empresas, #tarjetas-ofertas, #tarjetas-alumnos-oferta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3%;
+}
+
+.tarjeta {
+    width: 150px;
+    height: 150px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 2%;
+}
+
+.tarjeta img {
+    width: 100px;
+    height: 100px;
+    margin-top: 5px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.tarjeta p {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Modal */
+/* Fondo oscuro con transparencia */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor del modal */
+.modal-contenido {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 25%;
+    position: relative;
+    font-size: 20px;
+}
+
+/* Imagen dentro del modal */
+.modal-contenido img {
+    width: 35%;
+    height: 35%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Botón de cerrar */
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+}
+
+#botones-admin, #botones-admin-empresa, #boton-asignar-oferta {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#botones-admin button, #botones-admin-empresa button, #boton-asignar-oferta button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Botón de editar */
+#boton-editar, #boton-editar-empresa {
+    background-color: #FBAB7E;
+    color: white;
+}
+
+#boton-editar:hover, #boton-editar-empresa:hover {
+    background-color: #e79260;
+    transform: scale(1.05);
+}
+
+/* Botón de eliminar */
+#boton-eliminar, #boton-eliminar-empresa {
+    background-color: #f44336;
+    color: white;
+}
+
+#boton-eliminar:hover, #boton-eliminar-empresa:hover {
+    background-color: #d34340;
+    transform: scale(1.05);
+}
+
+/* Contenedor del modal */
+#modal-añadir .modal-contenido, #modal-editar .modal-contenido, #modal-añadir-empresa .modal-contenido, #modal-editar-empresa .modal-contenido,#modal-añadir-oferta .modal-contenido{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    animation: aparecer 0.3s ease-in-out;
+}
+
+#modal-añadir .cerrar, #modal-editar .cerrar, #modal-añadir-empresa .cerrar, #modal-editar-empresa .cerrar, #modal-añadir-oferta .cerrar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Estilos del formulario */
+#form-añadir, #form-editar, #form-añadir-empresa, #form-editar-empresa, #form-añadir-oferta {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para las etiquetas */
+#form-añadir label, #form-editar label, #form-añadir-empresa label, #form-editar-empresa label, #form-añadir-oferta label {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: start;
+}
+
+/* Estilos para los campos de entrada */
+#form-añadir input, #form-editar input, #form-añadir-empresa input, #form-editar-empresa input, #form-añadir-oferta input {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Botón de guardar cambios */
+#form-añadir button, #form-editar button, #form-añadir-empresa button, #form-editar-empresa button, #form-añadir-oferta button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#form-añadir button:hover, #form-editar button:hover, #form-añadir-empresa button:hover, #form-editar-empresa button:hover, #form-añadir-oferta button:hover {
+    background-color: #218838;
+}
+
+select#editar-formacion, 
+select#editar-promocion, 
+select#añadir-formacion, 
+select#añadir-promocion,
+select#añadir-empresa-rama,
+select#editar-empresa-rama {
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Botón Volver al Menú */
+#volver-menu, #volver-menu-empresas, #btn-agregar-empresa, #volver-menu-bolsa, #btn-agregar-oferta {
+    padding: 10px 20px;
+    background-color: #f38647;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#volver-menu:hover, #volver-menu-empresas:hover, #btn-agregar-empresa:hover, #volver-menu-bolsa:hover, #btn-agregar-oferta:hover{
+    background-color: #e79260;
+    transform: scale(1.05);
+}
+
+/* Botón Añadir Alumno */
+.container-boton-añadir button,
+.añadir-alumnos, #btn-agregar-empresa {
+    padding: 10px 20px;
+    background-color: #f38647;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.container-boton-añadir button:hover,
+.añadir-alumnos:hover, #btn-agregar-empresa:hover {
+    background-color: #e79260;
+    transform: scale(1.05);
+}
+
+/* --- Nuevos estilos para la sección superior --- */
+
+/* Contenedor de la parte superior */
+.top-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+/* Div que agrupa los filtros y el botón de buscar */
+.filtros-buscar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Los filtros (dentro del div agrupador) */
+.filtros-buscar #filtros {
+    display: flex;
+    gap: 10px;
+}
+
+/* Botón Buscar, con el mismo estilo que los demás botones */
+#btn-buscar {
+    padding: 10px 20px;
+    background-color: #f38647;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#btn-buscar:hover {
+    background-color: #e79260;
+    transform: scale(1.05);
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <link rel="stylesheet" href="./css/css2menu.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="css/img/logo.png">
+            <p>ERPEA</p>
+        </div>
+        <div class="menu">
+            <p class="opcionMenuAlumnos">Alumnos</p>
+            <p class="opcionMenuEmpresas">Empresas</p>
+            <p class="opcionMenuBolsa">Bolsa de Empleo</p>
+        </div>
+        
+    </header>
+    
+    <h1>Menú Principal</h1>
+    
+    
+    <div id="botones" >
+        <div class="boton">
+            <button class="alumnos"></button>
+            <p>Alumnos</p>
+        </div>
+        <div class="boton">
+            <button class="empresas"></button>
+            <p>Empresas</p>
+        </div>
+        <div class="boton">
+            <button class="bolsa"></button>
+            <p>Bolsa de Empleo</p>
+        </div>
+    </div>
+
+
+    <!--Parte alumnos-->
+    <div  class="contenedor-alumnos" style="display: none;">
+        <div class="top-controls">
+            <button id="volver-menu">Volver al Menú</button>
+            <div class="filtros-buscar">
+                <div id="filtros">
+                    <select id="filtro-formacion">
+                        <option value="">Todos</option>
+                        <option value="Informatica">Informatica</option>
+                        <option value="Gestion">Gestion</option>
+                        <option value="TCAE">TCAE</option>
+                    </select>
+                    <select id="filtro-promocion">
+                        <option value="">Todos</option>
+                        <option value="2024/2025">2024/2025</option>
+                        <option value="2023/2024">2023/2024</option>
+                        <option value="2022/2023">2022/2023</option>
+                    </select>
+                </div>
+                <button id="btn-buscar">Buscar</button>
+            </div>
+        </div>
+        <div class="container-boton-añadir">
+            <button class="añadir-alumnos">Añadir Alumno</button>
+        </div>
+        <div id="tarjetas">
+            
+        </div>
+        
+    </div>
+
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <img id="modal-imagen" src="" alt="Foto del alumno">
+            <h2 id="modal-nombre"></h2>
+            <p><strong>Apellidos: </strong><span id="modal-apellidos"></span></p>
+            <p><strong>DNI: </strong><span id="modal-dni"></span></p>
+            <p><strong>Direccion: </strong><span id="modal-direccion"></span></p>
+            <p><strong>Telefono: </strong><span id="modal-telefono"></span></p>
+            <p><strong>Email: </strong><span id="modal-email"></span></p>
+            <p><strong>Formación: </strong> <span id="modal-formacion"></span></p>
+            <p><strong>Promoción: </strong> <span id="modal-promocion"></span></p>
+            <p><strong>Oferta: </strong><span id="modal-oferta"></span></p>
+            <p><strong>Trabajando: </strong><span id="modal-trabajando"></span></p>
+
+            <div id="botones-admin" style="display: none;">
+                <button id="boton-editar">Editar</button>
+                <button id="boton-eliminar">Eliminar</button>
+            </div>
+            <div id="boton-asignar-oferta" style="display: none;">
+                <button id="boton-asignar">Asignar Oferta</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-añadir" class="modal" style="display: none;">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Añadir Alumno</h2>
+            <form id="form-añadir">
+                <label for="añadir-nombre">Nombre:</label>
+                <input type="text" id="añadir-nombre" name="nombre" required>
+    
+                <label for="añadir-apellidos">Apellidos:</label>
+                <input type="text" id="añadir-apellidos" name="apellidos" required>
+    
+                <label for="añadir-dni">DNI:</label>
+                <input type="text" id="añadir-dni" name="dni" required>
+    
+                <label for="añadir-direccion">Dirección:</label>
+                <input type="text" id="añadir-direccion" name="direccion" required>
+    
+                <label for="añadir-telefono">Teléfono:</label>
+                <input type="text" id="añadir-telefono" name="telefono" required>
+    
+                <label for="añadir-email">Email:</label>
+                <input type="email" id="añadir-email" name="email" required>
+    
+                <label for="añadir-formacion">Formación:</label>
+                <select id="añadir-formacion" name="formacion" required>
+                    <option value="">--Selecciona--</option>
+                    <option value="Informatica">Informatica</option>
+                    <option value="Gestion">Gestion</option>
+                    <option value="TCAE">TCAE</option>
+                </select>
+    
+                <label for="añadir-promocion">Promoción:</label>
+                <select id="añadir-promocion" name="promocion" required>
+                    <option value="">--Selecciona--</option>
+                    <option value="2024/2025">2024/2025</option>
+                    <option value="2023/2024">2023/2024</option>
+                    <option value="2022/2023">2022/2023</option>
+                </select>
+    
+                <label for="añadir-foto">Foto:</label>
+                <input type="text" id="añadir-foto" name="foto" required>
+    
+                <button type="submit" class="enviar">Añadir Alumno</button>
+            </form>
+        </div>
+    </div>
+    <div id="modal-editar" class="modal" style="display: none;">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Editar Alumno</h2>
+            <form id="form-editar">
+                <label for="editar-nombre">Nombre:</label>
+                <input type="text" id="editar-nombre" name="nombre">
+    
+                <label for="editar-apellidos">Apellidos:</label>
+                <input type="text" id="editar-apellidos" name="apellidos">
+    
+                <label for="editar-direccion">Dirección:</label>
+                <input type="text" id="editar-direccion" name="direccion">
+    
+                <label for="editar-telefono">Teléfono:</label>
+                <input type="text" id="editar-telefono" name="telefono">
+    
+                <label for="editar-email">Email:</label>
+                <input type="email" id="editar-email" name="email">
+    
+                <label for="editar-formacion">Formación:</label>
+                    <select id="editar-formacion" name="formacion">
+                        <option value="">--Selecciona--</option>
+                        <option value="Informatica">Informatica</option>
+                        <option value="Gestion">Gestion</option>
+                        <option value="TCAE">TCAE</option>
+                    </select>
+    
+                <label for="editar-promocion">Promoción:</label>
+                <select id="editar-promocion" name="promocion">
+                    <option value="">--Selecciona--</option>
+                    <option value="2024/2025">2024/2025</option>
+                    <option value="2023/2024">2023/2024</option>
+                    <option value="2022/2023">2022/2023</option>
+                </select>
+    
+                <label for="editar-foto">Foto:</label>
+                <input type="text" id="editar-foto" name="foto" required>
+    
+                <button type="submit" class="enviar">Editar Alumno</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!--Parte de empresas-->
+    <div class="contenedor-empresas" style="display: none;">
+        <div class="top-controls">
+            <button id="volver-menu-empresas">Volver al Menú Principal</button>
+            <button id="btn-agregar-empresa">Añadir Empresa</button>
+        </div>
+        <div id="tarjetas-empresas">
+            <!-- Las tarjetas de las empresas se insertarán aquí -->
+        </div>
+    </div>
+
+    <div id="modal-empresa" class="modal" style="display: none;">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2 id="modal-empresa-nombre"></h2>
+            <p><strong>Teléfono:</strong> <span id="modal-empresa-telefono"></span></p>
+            <p><strong>Email:</strong> <span id="modal-empresa-email"></span></p>
+            <p><strong>Contacto:</strong> <span id="modal-empresa-contacto"></span></p>
+            <p><strong>Rama:</strong> <span id="modal-empresa-rama"></span></p>
+            <div id="botones-admin-empresa" style="display: none;">
+                <button id="boton-editar-empresa">Editar</button>
+                <button id="boton-eliminar-empresa">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-añadir-empresa" class="modal" style="display: none;">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Añadir Empresa</h2>
+            <form id="form-añadir-empresa">
+                <label for="añadir-empresa-nombre">Nombre:</label>
+                <input type="text" id="añadir-empresa-nombre" name="nombre" required>
+                
+                <label for="añadir-empresa-telefono">Teléfono:</label>
+                <input type="text" id="añadir-empresa-telefono" name="telefono" required>
+                
+                <label for="añadir-empresa-email">Email:</label>
+                <input type="email" id="añadir-empresa-email" name="email" required>
+                
+                <label for="añadir-empresa-contacto">Persona de Contacto:</label>
+                <input type="text" id="añadir-empresa-contacto" name="personaContacto" required>
+                
+                <label for="añadir-empresa-rama">Rama:</label>
+                <select id="añadir-empresa-rama" name="rama" required>
+                    <option value="">--Seleccione--</option>
+                    <option value="Informatica">Informatica</option>
+                    <option value="Gestion">Gestion</option>
+                    <option value="TCAE">TCAE</option>
+                </select>
+                
+                <!-- El campo "ofertas" no se incluye, se establecerá en "Ninguna" por defecto en el backend -->
+                <button type="submit" class="enviar-empresa">Añadir Empresa</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-editar-empresa" class="modal" style="display: none;">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Editar Empresa</h2>
+            <form id="form-editar-empresa">
+                <label for="editar-empresa-nombre">Nombre:</label>
+                <input type="text" id="editar-empresa-nombre" name="nombre">
+                
+                <label for="editar-empresa-telefono">Teléfono:</label>
+                <input type="text" id="editar-empresa-telefono" name="telefono">
+                
+                <label for="editar-empresa-email">Email:</label>
+                <input type="email" id="editar-empresa-email" name="email">
+                
+                <label for="editar-empresa-contacto">Persona de Contacto:</label>
+                <input type="text" id="editar-empresa-contacto" name="personaContacto">
+                
+                <label for="editar-empresa-rama">Rama:</label>
+                <select id="editar-empresa-rama" name="rama">
+                    <option value="">--Seleccione--</option>
+                    <option value="Informatica">Informatica</option>
+                    <option value="Gestion">Gestion</option>
+                    <option value="TCAE">TCAE</option>
+                </select>
+                
+                <button type="submit" class="enviar-empresa">Editar Empresa</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="contenedor-bolsa" style="display: none;">
+        <div class="top-controls">
+            <button id="volver-menu-bolsa">Volver al Menú Principal</button>
+            <button id="btn-agregar-oferta">Añadir Oferta</button>
+        </div>
+
+        <div id="tarjetas-ofertas">
+            <!-- Aquí se mostrarán las tarjetas de empresas con ofertas -->
+        </div>
+    </div>
+
+    <div id="modal-añadir-oferta" class="modal" style="display: none;">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Añadir Oferta</h2>
+            <form id="form-añadir-oferta">
+                <label for="añadir-oferta-nombre">Empresa:</label>
+                <input type="text" id="añadir-oferta-empresa" name="nombre" required>
+                
+                <label for="añadir-empresa-telefono">Descripción:</label>
+                <input type="text" id="añadir-oferta-descripcion" name="telefono" required>
+                
+                <button type="submit" class="enviar-oferta">Añadir Oferta</button>
+            </form>
+        </div>
+    </div>
+      
+
+
+    <script src="script.js"></script>
+</body>
+</html>
