@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'vendor/autoload.php'; // Cargar MongoDB PHP Library
+require 'vendor/autoload.php'; 
 
 use MongoDB\Client;
 
@@ -8,7 +8,7 @@ $mongoClient = new Client("mongodb+srv://davidad:a4B36EDB@clase.6z984.mongodb.ne
 $db = $mongoClient->erp;
 $coleccion = $db->usuarios;
 
-// Recibir datos del formulario
+//GUARDO DATOS DE INCICIO DE SESION Y HAGO LA CONSULTA, SI COINCIDEN LOS PARAMETROS SE GUARDAN LOS DATOS EN SESION Y TE LLEVA MENU
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_POST["usuario"];
     $contraseña = $_POST["contraseña"];

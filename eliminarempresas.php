@@ -8,7 +8,7 @@ $cliente = new MongoDB\Client($url);
 $bd = $cliente->erp;
 $coleccion = $bd->empresas;
 
-// Se espera que el ID se envíe mediante POST
+//GUARDO EL ID SI NO NULL
 $id = $_POST['id'] ?? null;
 if (!$id) {
     echo json_encode(["success" => false, "message" => "No se ha proporcionado el ID de la empresa"]);
@@ -16,7 +16,7 @@ if (!$id) {
 }
 
 try {
-    // Convertimos el ID recibido en una instancia de ObjectId
+    //ELIMINAR EMPRESA
     $resultado = $coleccion->deleteOne(["_id" => new MongoDB\BSON\ObjectId($id)]);
     if ($resultado->getDeletedCount() > 0) {
         echo json_encode(["success" => true]);

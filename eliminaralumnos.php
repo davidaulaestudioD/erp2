@@ -3,7 +3,6 @@ require 'vendor/autoload.php';
 
 header('Content-Type: application/json');
 
-// Configuración de la conexión con MongoDB
 $url = "mongodb+srv://davidad:a4B36EDB@clase.6z984.mongodb.net/?retryWrites=true&w=majority&appName=CLASE";
 $cliente = new MongoDB\Client($url);
 

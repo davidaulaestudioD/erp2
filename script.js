@@ -406,6 +406,7 @@ $(document).ready(function () {
                     const emailEmpresa = $(this).data("email");
                     const contactoEmpresa = $(this).data("contacto");
                     const ramaEmpresa = $(this).data("rama");
+                    const ofertasEmpresa = $(this).data("ofertas");
                     
                     
                     $("#modal-empresa-nombre").text(nombreEmpresa);
@@ -490,8 +491,10 @@ $(document).ready(function () {
                                         } else {
                                             datosEditados.rama = $("#editar-empresa-rama").val().trim();
                                         }
-                                        
-                                        
+
+                                        //console.log(datosEditados);
+                                    
+                                
                                         $.ajax({
                                             url: 'editarempresas.php', 
                                             type: 'POST',
@@ -593,24 +596,23 @@ $(document).ready(function () {
 
     //BOLSA DE EMPLEO
     $(".bolsa").on("click", function () {
-        // Ocultar otras vistas
         $contenedorMenu.hide();
         $("h1").hide();
         $(".contenedor-bolsa").show();
         $("#tarjetas-ofertas").show();
         
-        // Realizar la petición AJAX para listar las empresas con ofertas
+        //LISTAR TODAS LAS OFERTAS 
         $.ajax({
             url: 'listarofertas.php',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                $("#tarjetas-ofertas").empty();  // Vaciar el contenedor de tarjetas
+                $("#tarjetas-ofertas").empty(); 
     
                
                 data.forEach(function (empresa) {
                     empresa.ofertas.forEach(function(oferta, index) {
-                        // Si la oferta es un string, la usamos directamente; si es un objeto (por ejemplo, ya asignada), tomamos la propiedad 'descripcion'
+                        //SI ES STRING SE USA OFERTA, SI NO, SE ACCEDE A OFERTA.DESCRIPCION
                         let descripcion = (typeof oferta === "string") ? oferta : oferta.descripcion;
                         let tarjeta = `
                             <div class="tarjeta" 
@@ -619,16 +621,16 @@ $(document).ready(function () {
                                  data-rama="${empresa.rama}"
                                  data-offer-index="${index}"
                                  data-oferta="${descripcion}">
-                                 <p><strong>Empresa:</strong> ${empresa.nombre}</p>
+                                 <p>${empresa.nombre}</p>
                                  <p><strong>Oferta:</strong> ${descripcion}</p>
                             </div>
-                        `; //data-offer-index es la posicion que ocupa en el array
+                        `; //data-offer-index es la posicion que ocupa en el array la oferta
                         $("#tarjetas-ofertas").append(tarjeta);
                     });
                 });
 
                 $("#tarjetas-ofertas").on("click", ".tarjeta", function () {
-                    // Recuperamos la rama de la oferta (la rama de la empresa)
+                    //GUARDO LA RAMA PARA COMPARAR
                     var ramaOferta = $(this).data("rama");
 
                     var ofertaActual = {
@@ -636,31 +638,26 @@ $(document).ready(function () {
                         empresaId: $(this).data("id"),
                         offerIndex: $(this).data("offer-index") //Posicion en el array de las ofertas
                     }
-                
-                    // Ocultamos el contenedor de ofertas
+            
                     $("#tarjetas-ofertas").hide();
                 
-                    // Creamos o limpiamos un nuevo div para mostrar los alumnos filtrados dentro de la Bolsa
+                    
                     if ($("#tarjetas-alumnos-oferta").length === 0) {
-                        // Si no existe, lo creamos al final del contenedor-bolsa
                         $(".contenedor-bolsa").append('<div id="tarjetas-alumnos-oferta"></div>');
+
                     } else {
-                        // Si ya existe, lo limpiamos y nos aseguramos de mostrarlo
                         $("#tarjetas-alumnos-oferta").empty().show();
                     }
                 
-                    // Realizamos la llamada AJAX para listar alumnos
+                    //LISTAMOS LOS ALUMNOS PARA COMPARAR CON LAS OFERTAS DISPONIBLES
                     $.ajax({
                         url: 'listaralumnos.php',
                         type: 'GET',
                         dataType: 'json',
                         success: function (data) {
-                            // Vaciamos el contenedor de alumnos filtrados
                             $("#tarjetas-alumnos-oferta").empty();
                 
-                            // Recorremos cada alumno y solo incluimos aquellos que cumplan:
-                            // - No están trabajando ("No")
-                            // - Su formación coincide con la rama de la empresa (ramaOferta)
+                            //ALUMNOS TRABAJANDO=="NO" Y RAMA Y FORMACION COINCIDAN
                             data.forEach(alumno => {
                                 if (alumno.trabajando === "No" && alumno.formacion === ramaOferta) {
                                     let tarjeta = `
@@ -684,9 +681,8 @@ $(document).ready(function () {
                                 }
                             });
                 
-                            // Asignar el evento click a las tarjetas de alumnos en modo oferta
                             $(".tarjeta.oferta-modo").click(function () {
-                                // Configuramos el modal para mostrar la información del alumno
+                                //MODAL DEL ALUMNO
                                 $("#modal-imagen").attr("src", $(this).data("foto"));
                                 $("#modal-nombre").text($(this).data("nombre"));
                                 $("#modal-apellidos").text($(this).data("apellidos"));
@@ -699,18 +695,14 @@ $(document).ready(function () {
                                 $("#modal-oferta").text($(this).data("oferta"));
                                 $("#modal-trabajando").text($(this).data("trabajando"));
                 
-                                // Se ocultan los botones de administración
-                                // (en el futuro se podrá agregar un botón para asignar la oferta)
+                                //BOTONES DE ADMIN FUERA
                                 $("#botones-admin").hide();
                                 $("#boton-asignar-oferta").show();
 
 
                                 $("#boton-asignar").off("click").on("click", function(){
-                                    // Se obtiene el DNI del alumno a partir del modal
                                     let dniAlumno = $("#modal-dni").text();
-                                    // Los parámetros se toman de currentOffer y del modal:
-                                    // - nuevaOferta será currentOffer.descripcion
-                                    // - empresaId y offerIndex también están en currentOffer
+                                    
                                     $.ajax({
                                         url: 'asignaroferta.php',
                                         type: 'POST',
@@ -719,11 +711,10 @@ $(document).ready(function () {
                                             dni: dniAlumno,
                                             nuevaOferta: ofertaActual.descripcion,
                                             empresaId: ofertaActual.empresaId,
-                                            offerIndex: ofertaActual.offerIndex
+                                            offerIndex: ofertaActual.offerIndex //POSICION DE LA OFERTA EN EL ARRAY
                                         },
                                         success: function(response) {
                                             if(response.success){
-                                                // Si todo sale bien, se vuelve al menú principal
                                                 $("#modal").fadeOut();
                                                 $(".contenedor-bolsa").hide();
                                                 $("#tarjetas-alumnos-oferta").remove();
@@ -744,8 +735,7 @@ $(document).ready(function () {
                                 $("#modal").fadeIn();
 
                             });
-                
-                            // Eventos para cerrar el modal
+
                             $(".cerrar, #modal").click(function () {
                                 $("#modal").fadeOut();
                             });
@@ -767,9 +757,7 @@ $(document).ready(function () {
             }
         });
 
-        
-
-        
+        //AÑADIR OFERTA NUEVA
         $("#btn-agregar-oferta").on("click", function(){
             
             $("#modal-añadir-oferta").fadeIn();
@@ -817,8 +805,6 @@ $(document).ready(function () {
             
         });
         
-
-        // Botón para volver al menú desde la Bolsa de Empleo
         $("#volver-menu-bolsa").on("click", function(){
             $(".contenedor-bolsa").hide();
             $("#tarjetas-alumnos-oferta").hide();
@@ -826,13 +812,6 @@ $(document).ready(function () {
             $("h1").show();
 
         });
-
-
-
         
     });
-
-
-
-
 });

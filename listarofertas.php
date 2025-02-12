@@ -7,7 +7,7 @@ $cliente = new MongoDB\Client($url);
 $bd = $cliente->erp;
 $coleccion = $bd->empresas;
 
-// Filtrar empresas que tengan el campo 'ofertas' y que el array no esté vacío
+//LISTAR OFERTAS DE LAS EMPRESAS
 $cursor = $coleccion->find([
     "ofertas" => ['$exists' => true, '$ne' => []]
 ]);

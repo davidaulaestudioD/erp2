@@ -1,4 +1,6 @@
 <?php
+
+//INICIA LA SESION Y GUARDA EL VALOR DEL ROL E INDICA SI ESTA LA SESION INICIADA O NO
 session_start();
 
 if (isset($_SESSION["usuario"]) && isset($_SESSION["rol"])) {

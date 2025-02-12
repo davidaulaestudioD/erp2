@@ -8,7 +8,7 @@ $cliente = new MongoDB\Client($url);
 $bd = $cliente->erp;
 $coleccion = $bd->empresas;
 
-// Recoger los datos enviados por POST
+//RECOGER DATOS
 $nombre = $_POST['nombre'] ?? null;
 $telefono = $_POST['telefono'] ?? null;
 $email = $_POST['email'] ?? null;
@@ -16,7 +16,6 @@ $personaContacto = $_POST['personaContacto'] ?? null;
 $rama = $_POST['rama'] ?? null;
 $ofertas = $_POST['ofertas'] ?? [];
 
-// Validar que se hayan recibido los campos obligatorios
 if (!$nombre || !$telefono || !$email || !$personaContacto || !$rama) {
     echo json_encode([
         "success" => false,
@@ -25,7 +24,7 @@ if (!$nombre || !$telefono || !$email || !$personaContacto || !$rama) {
     exit();
 }
 
-// Crear el documento a insertar
+//ARRAY PARA AÑADIR
 $documento = [
     "nombre" => $nombre,
     "telefono" => $telefono,
@@ -36,7 +35,9 @@ $documento = [
 ];
 
 try {
+    //INSERCION
     $resultado = $coleccion->insertOne($documento);
+    //COMPROBAR INSERCION
     if ($resultado->getInsertedCount() == 1) {
         echo json_encode([
             "success" => true,

@@ -98,7 +98,6 @@ div#botones {
     border-radius: 30px;
 }
 
-/* Vista de los alumnos */
 
 #contenido {
     display: none;
@@ -156,8 +155,6 @@ div#botones {
     font-weight: bold;
 }
 
-/* Modal */
-/* Fondo oscuro con transparencia */
 .modal {
     position: fixed;
     top: 0;
@@ -170,7 +167,6 @@ div#botones {
     align-items: center;
 }
 
-/* Contenedor del modal */
 .modal-contenido {
     background: white;
     padding: 20px;
@@ -181,7 +177,7 @@ div#botones {
     font-size: 20px;
 }
 
-/* Imagen dentro del modal */
+
 .modal-contenido img {
     width: 35%;
     height: 35%;
@@ -189,7 +185,6 @@ div#botones {
     object-fit: cover;
 }
 
-/* Botón de cerrar */
 .cerrar {
     position: absolute;
     top: 10px;
@@ -214,7 +209,7 @@ div#botones {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Botón de editar */
+
 #boton-editar, #boton-editar-empresa {
     background-color: #FBAB7E;
     color: white;
@@ -225,7 +220,6 @@ div#botones {
     transform: scale(1.05);
 }
 
-/* Botón de eliminar */
 #boton-eliminar, #boton-eliminar-empresa {
     background-color: #f44336;
     color: white;
@@ -236,7 +230,6 @@ div#botones {
     transform: scale(1.05);
 }
 
-/* Contenedor del modal */
 #modal-añadir .modal-contenido, #modal-editar .modal-contenido, #modal-añadir-empresa .modal-contenido, #modal-editar-empresa .modal-contenido,#modal-añadir-oferta .modal-contenido{
     background: white;
     padding: 20px;
@@ -255,20 +248,17 @@ div#botones {
     cursor: pointer;
 }
 
-/* Estilos del formulario */
 #form-añadir, #form-editar, #form-añadir-empresa, #form-editar-empresa, #form-añadir-oferta {
     display: flex;
     flex-direction: column;
 }
 
-/* Estilos para las etiquetas */
 #form-añadir label, #form-editar label, #form-añadir-empresa label, #form-editar-empresa label, #form-añadir-oferta label {
     margin-top: 10px;
     font-weight: bold;
     text-align: start;
 }
 
-/* Estilos para los campos de entrada */
 #form-añadir input, #form-editar input, #form-añadir-empresa input, #form-editar-empresa input, #form-añadir-oferta input {
     padding: 8px;
     margin-top: 5px;
@@ -278,8 +268,7 @@ div#botones {
     box-sizing: border-box;
 }
 
-/* Botón de guardar cambios */
-#form-añadir button, #form-editar button, #form-añadir-empresa button, #form-editar-empresa button, #form-añadir-oferta button {
+#form-añadir button, #form-editar button, #form-añadir-empresa button, #form-editar-empresa button, #form-añadir-oferta button, #boton-asignar-oferta button {
     margin-top: 15px;
     padding: 10px;
     background-color: #28a745;
@@ -312,7 +301,6 @@ select#editar-empresa-rama {
     color: #333;
 }
 
-/* Botón Volver al Menú */
 #volver-menu, #volver-menu-empresas, #btn-agregar-empresa, #volver-menu-bolsa, #btn-agregar-oferta {
     padding: 10px 20px;
     background-color: #f38647;
@@ -329,7 +317,6 @@ select#editar-empresa-rama {
     transform: scale(1.05);
 }
 
-/* Botón Añadir Alumno */
 .container-boton-añadir button,
 .añadir-alumnos, #btn-agregar-empresa {
     padding: 10px 20px;
@@ -348,9 +335,8 @@ select#editar-empresa-rama {
     transform: scale(1.05);
 }
 
-/* --- Nuevos estilos para la sección superior --- */
 
-/* Contenedor de la parte superior */
+
 .top-controls {
     display: flex;
     align-items: center;
@@ -360,20 +346,20 @@ select#editar-empresa-rama {
     margin-top: 10px;
 }
 
-/* Div que agrupa los filtros y el botón de buscar */
 .filtros-buscar {
     display: flex;
     align-items: center;
     gap: 10px;
 }
+#filtros {
+    margin-top: 15px;
+}
 
-/* Los filtros (dentro del div agrupador) */
 .filtros-buscar #filtros {
     display: flex;
     gap: 10px;
 }
 
-/* Botón Buscar, con el mismo estilo que los demás botones */
 #btn-buscar {
     padding: 10px 20px;
     background-color: #f38647;

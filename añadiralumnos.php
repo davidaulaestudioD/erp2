@@ -4,16 +4,14 @@ require 'vendor/autoload.php';
 header('Content-Type: application/json');
 
 try {
-    // Conexión a MongoDB
     $url = "mongodb+srv://davidad:a4B36EDB@clase.6z984.mongodb.net/?retryWrites=true&w=majority&appName=CLASE";
     $cliente = new MongoDB\Client($url);
     $bd = $cliente->erp;
     $coleccion = $bd->alumnos;
 
-    // Obtener los datos JSON enviados desde el frontend
+    
     $data = $_POST;
 
-    // Validar que todos los campos requeridos están presentes
     if (
         empty($data['dni']) || empty($data['nombre']) || empty($data['apellidos']) ||
         empty($data['direccion']) || empty($data['telefono']) || empty($data['email']) ||
@@ -26,7 +24,7 @@ try {
         exit;
     }
 
-    // Verificar si el alumno ya existe (basado en el DNI)
+    //COMPROBAMOS SI EXISTE EL ALUMNO
     $existe = $coleccion->findOne(['dni' => $data['dni']]);
 
     if ($existe) {
@@ -37,7 +35,7 @@ try {
         exit;
     }
 
-    // Insertar un nuevo alumno en la colección
+    //INSERCION NUEVO ALUMNO
     $resultado = $coleccion->insertOne([
         'nombre' => $data['nombre'],
         'apellidos' => $data['apellidos'],
@@ -52,7 +50,7 @@ try {
         'foto' => $data['foto']
     ]);
 
-    // Verificar si la inserción fue exitosa
+    //COMPROBAR SI SE INSERTO
     if ($resultado->getInsertedCount() > 0) {
         echo json_encode([
             'success' => true,
