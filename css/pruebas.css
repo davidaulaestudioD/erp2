@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+
+body {
+    margin: 0;
+    font-family: "DM Serif Text", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 50%, #F7CE68 98%);
+    height: 100vh;
+}
+
+header {
+    background-color: blanchedalmond;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Usamos padding en porcentaje para mantenerlo relativo */
+}
+
+/* Logo: 20% del ancho, alineado a la izquierda */
+header .logo {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    /* Eliminamos position absolute para que participe en el flex layout */
+}
+header .logo img {
+    width: 40%; /* ajusta según convenga; este porcentaje es relativo al div .logo */
+    margin-right: 1%;
+}
+
+/* Menú: ocupa 60% del ancho y se centra */
+header .menu {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    font-size: 24px; /* tamaño relativo; puedes ajustar o eliminar */
+}
+
+/* Salir: ocupa 20% del ancho y se alinea a la derecha */
+header .salir {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+header .salir img {
+    width: 20%; /* tamaño relativo al contenedor .salir */
+    margin-right: 5%;
+}
