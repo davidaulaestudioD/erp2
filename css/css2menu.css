@@ -449,14 +449,7 @@ select#editar-empresa-rama {
     .boton {
         width: 75%;
     }
-    /*
-    #volver-menu {
-        width: 30%;
-        padding: 10px 20px;
-        font-size: 12px; 
-        margin-right: 5px;
-    }
-    */
+
     .filtros-buscar {
         width: 70%;
         display: flex;
@@ -479,11 +472,17 @@ select#editar-empresa-rama {
     }
     .flecha-volver {
         display: inline-block;
-        width: 24px; /* Ajusta el tamaño según necesites */
+        width: 24px;
         height: auto;
     }
 
     #btn-agregar-empresa, #btn-agregar-oferta {
         margin-left: 15px;
     }
+
+
+
+
+
+
 }
